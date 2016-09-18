@@ -5,7 +5,7 @@ locale: Chicago, IL
 description: Data science portfolio of some projects I've been working on.
 logo: site-logo.png
 search: true
-url: http://kahultman.github.io/data-science-portfolio
+url: https://kahultman.github.io/data-science-portfolio
 
 # Jekyll configuration
 
