@@ -74,7 +74,7 @@ Now whenever you want to connect to your server via the terminal use the followi
 
 
 ```
-$ ssh -i .ssh/HadoopAWS.pem ubuntu@0.0.0.0
+ssh -i .ssh/HadoopAWS.pem ubuntu@0.0.0.0
 ```
 
 2. Add users with username and common password
