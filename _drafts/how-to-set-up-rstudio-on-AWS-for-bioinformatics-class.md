@@ -50,7 +50,7 @@ Select t2.micro for the free account eligible option.
 
 Click 'Next' until you get to the 6th option, to 'Configure Security Group.' Make sure you have both http and ssh as ways to access your server. If only one is present, click 'Add Rule' and fill in so it looks like this.
 
-<figure><img src="/images/AWS/security.png" alt="security"></figure>
+![Security](/images/AWS/security.png)
 
 After clicking Review and Launch click Launch. You will be prompted to set up a public key file for authentication. Create a new key called AWS.pem which will be downloaded to your computer. This file acts like a physical password allowing you to connect to your server by ssh.
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: how-to-set-up-rstudio-on-AWS-for-bioinformatics-class.md
+title: How to set up RStudio on AWS for a Bioinformatics class
 excerpt: "A powerful and easy way to introduce students to R"
 modified: 2015-09-07
 categories: articles
@@ -44,16 +44,17 @@ I decided in the end for option 3, rolling my own server on AWS. There is a nice
 
 You'll first need to set up an account with [AWS](https://aws.amazon.com/). Once you have an account with a credit card on file you are ready to start.
 
-1. Select your region and version of RStudio on Mr. Aslett's site, which will lead you into AWS with his AMI selected. I'm using the U.S. East region which is good for my location in Chicago.
-2. Select t2.micro for the free account eligible option. 
-3. Click 'Next' until you get to the 6th option, to 'Configure Security Group'
-2. Make sure you have both http and ssh as ways to access your server. If only one is present, click 'Add Rule' and fill in so it looks like this.
+Select your region and version of RStudio on Mr. Aslett's site, which will lead you into AWS with his AMI selected. I'm using the U.S. East region which is good for my location in Chicago.
 
-<figure><img src="/images/AWS/security.png" alt="security"></figure>
+Select t2.micro for the free account eligible option. 
 
-3. After clicking Review and Launch click Launch. You will be prompted to set up a public key file for authentication. Create a new key called AWS.pem which will be downloaded to your computer. This file acts like a physical password allowing you to connect to your server by ssh.
+Click 'Next' until you get to the 6th option, to 'Configure Security Group.' Make sure you have both http and ssh as ways to access your server. If only one is present, click 'Add Rule' and fill in so it looks like this.
 
-4. Obtain your public IP address and see if your server is up. Go to your running instances, select it, and copy the Public IP on the lower Description. Put the IP address in your browser's address bar and see your RStudio login page. 
+![Security](/images/AWS/security.png)
+
+After clicking Review and Launch click Launch. You will be prompted to set up a public key file for authentication. Create a new key called AWS.pem which will be downloaded to your computer. This file acts like a physical password allowing you to connect to your server by ssh.
+
+Obtain your public IP address and see if your server is up. Go to your running instances, select it, and copy the Public IP on the lower Description. Put the IP address in your browser's address bar and see your RStudio login page. 
 
 <figure><img src="/images/AWS/rstudio-login.png" alt="security"></figure>
 
@@ -61,7 +62,7 @@ You'll first need to set up an account with [AWS](https://aws.amazon.com/). Once
 
 ## Create accounts for each student in your class
 
-1. ssh into your instance. On Mac, find your Terminal application. The easiest way is to open up Spotlight with Command-Space and type 'terminal.' 
+Ssh into your instance. On Mac, find your Terminal application. The easiest way is to open up Spotlight with Command-Space and type 'terminal.' 
 
 I recommend placing your public key .pem file you downloaded to a hidden directory in your home folder.
 
@@ -74,10 +75,10 @@ Now whenever you want to connect to your server via the terminal use the followi
 
 
 ```
-$ ssh -i .ssh/HadoopAWS.pem ubuntu@0.0.0.0
+ssh -i .ssh/HadoopAWS.pem ubuntu@0.0.0.0
 ```
 
-2. Add users with username and common password
+Add users with username and common password
 
 After you ssh into the server, type:
 
@@ -89,11 +90,11 @@ The adduser script will prompt you for information on each user. Here I left all
 
 ## Install packages to R system library
 
-1. Create script with necessary packages.
+### Create script with necessary packages.
 
 I created an R script with the packages that we would use throughout the semester. Some were basic R packages from CRAN, and others were from the [Bioconductor](https://www.bioconductor.org/) project. My script is [here](https://github.com/kahultman/bioinformatics/blob/master/installpackages.R).
 
-2. Copy the script to the server.
+### Copy the script to the server.
 
 Open a second terminal window and secure copy (scp) your script to the server. Once again use your public IP. If you don't know the path to your script you can drag your file from the finder into the terminal and it will fill in the path and file name for you. Notice the colon at the end of the public IP address, as well. 
 
@@ -102,13 +103,13 @@ scp -i .ssh/AWS.pem location/of/script/packages.R ubuntu@0.0.0.0:
 
 ```
 
-3. Run the script from the root super user. This syntax will install for all users. From the terminal with the active ssh session, type:
+Run this script from the root super user. This syntax will install for all users. From the terminal with the active ssh session, type:
 
 ```
 sudo su - -c "R -e \"source('/home/ubuntu/packages.R')\""
 ```
 
-4. Install individual packages as necessary. This syntax will install for all users. replace PACKAGENAME with your desired package name.
+Install individual packages as necessary. This syntax will install for all users. replace PACKAGENAME with your desired package name.
 
 ```
 sudo su - -c "R -e \"install.packages('PACKAGENAME')\""
@@ -117,7 +118,6 @@ sudo su - -c "R -e \"install.packages('PACKAGENAME')\""
 
 ## Scale your instance according to your needs and budget
 
-1. Scale up to r3.large or r3.xlarge instance
 Thus far we have set up our instance as a t2.micro. This is the only option eligible for the free service for the first year. During the lab sessions, however, the t2.micro won't be able to handle the memory-intensive analysis of microarray analysis and handling multiple users. The r3 instances are optimized for RAM use and are actually recommended for genomic applications. They are not free, but they are very affordable for course costs, especially when compared to wet-lab biology materials!
 
 Before the class meets for lab:
@@ -147,7 +147,7 @@ passwd
 
 Students can input their current password and change to one of their liking. Tell your students that when they type their password the cursor will not show astrisks or how many letters they've typed, but that it is, in fact, working.
 
-## Optional: Create permanent URL and domain name.
+## Optional: Create permanent URL and domain name
 
 Normally if you stop and restart your instance, you are assigned a new IP address. You can simply write the name of the new IP on the whiteboard or post it on-line whenever it changes. However, Amazon has an elastic IP that you can use. It's free as long as an instance is running. Since we can always run our free t2.micro instance, an elastic IP is essentially free. 
 
