@@ -36,7 +36,7 @@ I thought that the fourth option would be the least in overhead for both myself 
 
 But after using the Citrix application myself during a test run, it was painfully slow for memory intensive functions. And there was also an issue with uploading files onto the citrix server as our IT person insisted on requiring the students to use ftp. Getting data into R is enough of a pain without that additional barrier. 
 
-I decided in the end for option 3, rolling my own server on AWS. There is a nice public AMI available for R/RStudio by [Louis Aslett] (http://www.louisaslett.com/RStudio_AMI/) that makes it very easy to get the basic server up and running for a single user. Below is what I did to add my class as users and to set up packages under the system library.
+I decided in the end for option 3, rolling my own server on AWS. There is a nice public AMI available for R/RStudio by [Louis Aslett](http://www.louisaslett.com/RStudio_AMI/) that makes it very easy to get the basic server up and running for a single user. Below is what I did to add my class as users and to set up packages under the system library.
 
 # How to set up an RStudio environment for a Bioinformatics (or other!) course 
 
