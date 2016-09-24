@@ -59,92 +59,81 @@ Obtain your public IP address and see if your server is up. Go to your running i
 ![login]({{site.url}}/images/aws/rstudio-login.png)
 
 
+## Install packages to R system library
 
-## Create accounts for each student in your class
 
-Ssh into your instance. On Mac, find your Terminal application. The easiest way is to open up Spotlight with Command-Space and type 'terminal.' 
+Next up, we will install some packages that are useful for bioinformatics. The key here is to have the packages installed for all users on the server, in order to avoid having each student responsible for installing packages on their own. You might decide on using different packages, but you can use my script as a template for listing the packages you need to install. On Mac and linux, find your Terminal application. The easiest way on a Mac is to open up Spotlight with Command-Space and type 'terminal.' Windows requires additional software, but Linux users can essentially follow this as well. 
 
-I recommend placing your public key .pem file you downloaded to a hidden directory in your home folder.
+First, I recommend placing your AWS.pem file you downloaded to a hidden directory in your home folder.
 
 ```
 mkdir .ssh
 mv Downloads/AWS.pem .ssh/
 ```
 
-Now whenever you want to connect to your server via the terminal use the following command. Replace 0.0.0.0 with your public IP address. 
-
-
-```
-ssh -i .ssh/HadoopAWS.pem ubuntu@0.0.0.0
-```
-
-Add users with username and common password
-
-After you ssh into the server, type:
-
-```
-adduser StudentName
-```
-
-The adduser script will prompt you for information on each user. Here I left all fields blank for each user except the password, which was the same for all users. Later I would instruct them on how to change their password (see below).
-
-## Install packages to R system library
-
 ### Create script with necessary packages
 
-I created an R script with the packages that we would use throughout the semester. Some were basic R packages from CRAN, and others were from the [Bioconductor](https://www.bioconductor.org/) project. My script is [here](https://github.com/kahultman/bioinformatics/blob/master/installpackages.R).
+I created an R script with the packages that we would use throughout the semester. Some were basic R packages from CRAN, and others were from the [Bioconductor](https://www.bioconductor.org/) project. My script is [here](https://github.com/kahultman/bioinformatics/blob/master/installpackages.R) if you would like to use it as a template.
 
 ### Copy the script to the server
 
-Open a second terminal window and secure copy (scp) your script to the server. Once again use your public IP. If you don't know the path to your script you can drag your file from the finder into the terminal and it will fill in the path and file name for you. Notice the colon at the end of the public IP address, as well. 
+Use the terminal window to secure copy (scp) your script to the server. You will need your server's public IP, which is listed in the description section of the EC2 instances page. You will also need the path to where you placed the edited packages.R script. If you don't know the path to your script you can drag your file from the finder into the terminal window and it will fill in the path and file name for you. Replace 0.0.0.0 with your public IP address. Notice the colon at the end of the public IP address, as well. 
 
 ```
 scp -i .ssh/AWS.pem location/of/script/packages.R ubuntu@0.0.0.0:
 
 ```
 
-Run this script from the root super user. This syntax will install for all users. From the terminal with the active ssh session, type:
+Now that the script is copied to the server, we need to log in to the server and run it. This syntax will run as the root super user and install packages for all users. 
+
 
 ```
+ssh -i .ssh/HadoopAWS.pem ubuntu@0.0.0.0
 sudo su - -c "R -e \"source('/home/ubuntu/packages.R')\""
 ```
 
-Install individual packages as necessary. This syntax will install for all users. replace PACKAGENAME with your desired package name.
+For future reference, to install individual packages as necessary, this syntax will install for all users. Replace PACKAGENAME with your desired package.
 
 ```
 sudo su - -c "R -e \"install.packages('PACKAGENAME')\""
 
 ```
 
+## Create accounts for each student in your class
+
+Now you can add users with usernames and a common password. After you ssh into the server, for each student enter:
+
+```
+adduser StudentName
+```
+
+The adduser command will prompt you for information on each user. Here I left all fields blank for each user except the password, which was the same for all users. Later I would instruct them on how to change their password (see below).
+
 ## Scale your instance according to your needs and budget
 
 Thus far we have set up our instance as a t2.micro. This is the only option eligible for the free service for the first year. During the lab sessions, however, the t2.micro won't be able to handle the memory-intensive analysis of microarray analysis and handling multiple users. The r3 instances are optimized for RAM use and are actually recommended for genomic applications. They are not free, but they are very affordable for course costs, especially when compared to wet-lab biology materials!
 
-Before the class meets for lab:
+Before the class meets for lab, from the Actions pull down menu of your instance:
 
-Stop your t2.micro instance. 
+1. Stop your t2.micro instance, from the Instance State menu
+2. Resize it to r3.large or r3.xlarge, by selecting 'Change Instance Type' from the Instance Settings menu option
+3. Restart your instance, from the Instance State menu
 
-Resize it to r3.large or r3.xlarge.
-
-Restart your instance. 
-
-I reverse the process after lab is adjourned and switch back to the t2.micro. I do this to avoid unnecessary charges. The cost of the r3.large is $0.166 / hour, which would be ~$30 / week. That might be ok for your budget, but we like to cut costs at Elmhurst, and the t2.micro is adequate for students to occasionally log in and go over the exercise. They also have the Citrix server option as well. 
+I reverse the process after lab is adjourned and switch back to the t2.micro. I do this to avoid unnecessary charges. The cost of the r3.large is $0.166 / hour, which would be ~$30 / week. That might be ok for your budget, but we like to cut costs at Elmhurst, and the t2.micro is adequate for students to occasionally log in and go over the exercises. They also have the Citrix server option as well. 
 
 ## Estimated costs
 I estimate that by using the r3.large instance only during lab, we are paying less than $15 for the entire semester. During the weeks we are doing full scale genomic analysis, I will bump us up to the r3.xlarge. 
 
 ## First lab session
 
-I told the students how to change their passwords, after they log in to RStudio. 
-
-Go to Tools, Shell...
-
-```
-passwd
-```
+I told the students how to change their passwords, after they log in to RStudio. Go to Tools, Shell...
 
 ![password]({{site.url}}/images/aws/passwd.png)
 
+And enter the following command
+```
+passwd
+```
 Students can input their current password and change to one of their liking. Tell your students that when they type their password the cursor will not show astrisks or how many letters they've typed, but that it is, in fact, working.
 
 ## Optional: Create permanent URL and domain name
