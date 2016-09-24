@@ -56,7 +56,7 @@ After clicking Review and Launch click Launch. You will be prompted to set up a 
 
 Obtain your public IP address and see if your server is up. Go to your running instances, select it, and copy the Public IP on the lower Description. Put the IP address in your browser's address bar and see your RStudio login page. 
 
-![login](https://kahultman.github.io/data-science-portfolio/images/AWS/rstudio-login.png)
+![login](https://kahultman.github.io/data-science-portfolio/images/aws/rstudio-login.png)
 
 
 
@@ -143,7 +143,7 @@ Go to Tools, Shell...
 passwd
 ```
 
-![password](https://kahultman.github.io/data-science-portfolioimages/AWS/passwd.png)
+![password]({{site.url}}/images/aws/passwd.png)
 
 Students can input their current password and change to one of their liking. Tell your students that when they type their password the cursor will not show astrisks or how many letters they've typed, but that it is, in fact, working.
 
