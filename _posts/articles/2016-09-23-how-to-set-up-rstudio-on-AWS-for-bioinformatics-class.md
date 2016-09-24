@@ -50,13 +50,13 @@ Select t2.micro for the free account eligible option.
 
 Click 'Next' until you get to the 6th option, to 'Configure Security Group.' Make sure you have both http and ssh as ways to access your server. If only one is present, click 'Add Rule' and fill in so it looks like this.
 
-![Security](/images/AWS/security.png)
+![Security](https://kahultman.github.io/data-science-portfolio/images/AWS/security.png)
 
 After clicking Review and Launch click Launch. You will be prompted to set up a public key file for authentication. Create a new key called AWS.pem which will be downloaded to your computer. This file acts like a physical password allowing you to connect to your server by ssh.
 
 Obtain your public IP address and see if your server is up. Go to your running instances, select it, and copy the Public IP on the lower Description. Put the IP address in your browser's address bar and see your RStudio login page. 
 
-<figure><img src="/images/AWS/rstudio-login.png" alt="security"></figure>
+![login](https://kahultman.github.io/data-science-portfolio/images/AWS/rstudio-login.png)
 
 
 
@@ -143,7 +143,7 @@ Go to Tools, Shell...
 passwd
 ```
 
-<figure><img src="/images/AWS/passwd.png" alt="security"></figure>
+![password](https://kahultman.github.io/data-science-portfolioimages/AWS/passwd.png)
 
 Students can input their current password and change to one of their liking. Tell your students that when they type their password the cursor will not show astrisks or how many letters they've typed, but that it is, in fact, working.
 
