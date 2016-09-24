@@ -90,11 +90,11 @@ The adduser script will prompt you for information on each user. Here I left all
 
 ## Install packages to R system library
 
-### Create script with necessary packages.
+### Create script with necessary packages
 
 I created an R script with the packages that we would use throughout the semester. Some were basic R packages from CRAN, and others were from the [Bioconductor](https://www.bioconductor.org/) project. My script is [here](https://github.com/kahultman/bioinformatics/blob/master/installpackages.R).
 
-### Copy the script to the server.
+### Copy the script to the server
 
 Open a second terminal window and secure copy (scp) your script to the server. Once again use your public IP. If you don't know the path to your script you can drag your file from the finder into the terminal and it will fill in the path and file name for you. Notice the colon at the end of the public IP address, as well. 
 
@@ -150,6 +150,14 @@ Students can input their current password and change to one of their liking. Tel
 ## Optional: Create permanent URL and domain name
 
 Normally if you stop and restart your instance, you are assigned a new IP address. You can simply write the name of the new IP on the whiteboard or post it on-line whenever it changes. However, Amazon has an elastic IP that you can use. It's free as long as an instance is running. Since we can always run our free t2.micro instance, an elastic IP is essentially free. 
+
+Find Elastic IPs in the side menu of the EC2 Console. 
+
+![elastic]({{site.url}}/images/aws/elastic.jpg)
+
+Allocate a new address. Then highlight the new addres, pull down on Actions and select Associate Address. Then find your instance you want to associate with the elastic IP. 
+
+![associate]({{site.url}}/images/aws/associate.jpg)
 
 # Concluding remarks
 
