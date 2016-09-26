@@ -8,19 +8,9 @@ tags: [BigData]
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,
-	message = TRUE,
-	warning = TRUE
-)
-```
 
-```{r Load libaries, message=FALSE, warning=FALSE, include=FALSE}
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-```
+
+
 
 ## Exploring the popularity of Pig and Hive
 
@@ -29,7 +19,8 @@ Pig and Hive are sometimes compared with one another for their ability to do dat
 I first found the most popular tag for the associated technologies at [Stackoverflow](http://stackoverflow.com/tags). Then I used the public data explorer on [StackExchange](http://data.stackexchange.com/stackoverflow/query/440749/anonymous-feedback-votes-over-time-on-a-specific-tag?tagname=ocaml&ref=survey-2016#graph) and entered the tags as queries. I then downloaded the csv file and brought it in to R for some visualizations. 
 
 
-```{r Pig vs Hive}
+
+{% highlight r %}
 setwd("/Volumes/Half_Dome/OneDrive\ -\ Elmhurst\ College/Elmhurst\ Data\ Science/Programming\ Languages/Hadoop\ tech\ popularity/")
 pig <- read.csv("pig.csv", header = TRUE)
 hive <- read.csv("hive.csv", header = TRUE)
@@ -41,8 +32,9 @@ ggplot(pighive, aes(mo, Total.Votes)) +
   ggtitle("Popularity of Pig vs Hive on Stack Overflow") +
   ylab("Tag Votes") +
   xlab("Time")
+{% endhighlight %}
 
-```
+![plot of chunk Pig vs Hive](/figures/Pig vs Hive-1.svg)
 
 The number of posts with apache-pig as the tag has plataeued and slightly droped from its peak in 2014. Hive has gained in popularity and has more than 3x the number of posts. Seems like a clear winner for Hive here.  
 
@@ -50,7 +42,8 @@ The number of posts with apache-pig as the tag has plataeued and slightly droped
 
 How do the other Hadoop-related technologies compare? 
 
-```{r All}
+
+{% highlight r %}
 setwd("/Volumes/Half_Dome/OneDrive\ -\ Elmhurst\ College/Elmhurst\ Data\ Science/Programming\ Languages/Hadoop\ tech\ popularity/")
 hadoop <- read.csv("hadoop.csv", header = TRUE)
 hbase <- read.csv("hbase.csv", header = TRUE)
@@ -66,8 +59,9 @@ ggplot(hadoop_all, aes(mo, Total.Votes)) +
   ggtitle("Popularity of Hadoop related technologies on Stack Overflow") +
   ylab("Tag Votes") +
   xlab("Time")
+{% endhighlight %}
 
-```
+![plot of chunk All](/figures/All-1.svg)
 
 Hive's rise is completely dwarfed by the acceleration over the past year and half of Spark. Spark is tagged in twice the number of posts as the general Hadoop tag, a technology it was built upon. This has convinced me to put full effort into learning Spark going forward. 
 
