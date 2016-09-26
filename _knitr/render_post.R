@@ -22,7 +22,7 @@ KnitPost <- function(bashwd = "", convert_file = "", overwrite = FALSE) {
   # directory where your Rmd-files reside (relative to base)
   rmd.path <- paste0(site.path, "_knitr")
   # directory to save figures
-  fig.dir <- "figures/"
+  fig.dir <- "/Users/keithhultman/github/data-science-portfolio/figures/"
   # directory for converted markdown files
   posts.path <- paste0(site.path, "_posts")
   # cache
