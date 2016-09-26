@@ -44,7 +44,7 @@ I decided in the end for option 3, rolling my own server on AWS. There is a nice
 
 You'll first need to set up an account with [AWS](https://aws.amazon.com/). Once you have an account with a credit card on file you are ready to start.
 
-Select your region and version of RStudio on Mr. Aslett's site, which will lead you into AWS with his AMI selected. I'm using the U.S. East region which is good for my location in Chicago.
+Select your region and version of RStudio on Mr. [Aslett's](http://www.louisaslett.com/RStudio_AMI/)  site, which will lead you into AWS with his AMI selected. I'm using the U.S. East region which is good for my location in Chicago.
 
 Select t2.micro for the free account eligible option. 
 
@@ -52,11 +52,13 @@ Click 'Next' until you get to the 6th option, to 'Configure Security Group.' Mak
 
 ![Security]({{site.url}}/images/aws/security.png)
 
-After clicking Review and Launch click Launch. You will be prompted to set up a public key file for authentication. Create a new key called AWS.pem which will be downloaded to your computer. This file acts like a physical password allowing you to connect to your server by ssh.
+After clicking Review and Launch click Launch. You will be prompted to set up a public key file for authentication. Create a new key called AWS.pem which will be downloaded to your computer. This file acts like a physical password allowing you to connect to your server by ssh. But first, let's just see if our server is up and running. 
 
-Obtain your public IP address and see if your server is up. Go to your running instances, select it, and copy the Public IP on the lower Description. Put the IP address in your browser's address bar and see your RStudio login page. 
+Obtain your public IP address, which is listed in the description section of the EC2 instances page. Go to your running instances, select it, and copy the Public IP on the lower Description. Put the IP address in your browser's address bar and see your RStudio login page. 
 
 ![login]({{site.url}}/images/aws/rstudio-login.png)
+
+The default username and password are both 'rstudio' Log in and make sure it's working ok. You will want to change the password to the rstudio account (see below on how to do that from within the RStudio environment), but for now you can log out and continue the set up. 
 
 
 ## Install packages to R system library
@@ -64,27 +66,29 @@ Obtain your public IP address and see if your server is up. Go to your running i
 
 Next up, we will install some packages that are useful for bioinformatics. The key here is to have the packages installed for all users on the server, in order to avoid having each student responsible for installing packages on their own. You might decide on using different packages, but you can use my script as a template for listing the packages you need to install. On Mac and linux, find your Terminal application. The easiest way on a Mac is to open up Spotlight with Command-Space and type 'terminal.' Windows requires additional software, but Linux users can essentially follow this as well. 
 
-First, I recommend placing your AWS.pem file you downloaded to a hidden directory in your home folder.
+First, I recommend placing your AWS.pem file you downloaded to a hidden directory in your home folder. First we will change directories to your home folder (cd). Then create the .ssh hidden folder (mkdir). If you already have a folder called .ssh, you will get an error. Just continue with the next line. Move the AWS.pem file from your Downloads folder to the new directory. Then you will need to change the permissions (chmod) on the file to be read only to yourself and not readable or write-able for others. 
 
 ```
+cd
 mkdir .ssh
 mv Downloads/AWS.pem .ssh/
+chmod 400 .ssh/AWS.pem 
 ```
 
 ### Create script with necessary packages
 
-I created an R script with the packages that we would use throughout the semester. Some were basic R packages from CRAN, and others were from the [Bioconductor](https://www.bioconductor.org/) project. My script is [here](https://github.com/kahultman/bioinformatics/blob/master/installpackages.R) if you would like to use it as a template.
+I created an R script with the packages that we would use throughout the semester. Some were basic R packages from CRAN, and others were from the [Bioconductor](https://www.bioconductor.org/) project. My script is [here](https://github.com/kahultman/bioinformatics/blob/master/installpackages.R) if you would like to use it as a template. Save this file somewhere on your local machine, like in your Documents folder. 
 
 ### Copy the script to the server
 
-Use the terminal window to secure copy (scp) your script to the server. You will need your server's public IP, which is listed in the description section of the EC2 instances page. You will also need the path to where you placed the edited packages.R script. If you don't know the path to your script you can drag your file from the finder into the terminal window and it will fill in the path and file name for you. Replace 0.0.0.0 with your public IP address. Notice the colon at the end of the public IP address, as well. 
+Use the terminal window to secure copy (scp) your script to the server.  You will also need the path to where you placed the edited packages.R script. If you don't know the path to your script you can drag your file from the finder into the terminal window and it will fill in the path and file name for you. Replace 0.0.0.0 with your public IP address that you got from the Amazon EC2 page. Notice the colon at the end of the public IP address, as well. 
 
 ```
 scp -i .ssh/AWS.pem location/of/script/packages.R ubuntu@0.0.0.0:
 
 ```
 
-Now that the script is copied to the server, we need to log in to the server and run it. This syntax will run as the root super user and install packages for all users. 
+Now that the script is copied to the server, we need to log in to the server and run it. This syntax will run as the root super user and install packages for all users. Notice there is no colon after the IP address this time.
 
 
 ```
@@ -111,7 +115,7 @@ The adduser command will prompt you for information on each user. Here I left al
 
 ## Scale your instance according to your needs and budget
 
-Thus far we have set up our instance as a t2.micro. This is the only option eligible for the free service for the first year. During the lab sessions, however, the t2.micro won't be able to handle the memory-intensive analysis of microarray analysis and handling multiple users. The r3 instances are optimized for RAM use and are actually recommended for genomic applications. They are not free, but they are very affordable for course costs, especially when compared to wet-lab biology materials!
+Thus far we have set up our instance as a t2.micro. This is the only option eligible for the free service for the first year. During the lab sessions, however, the t2.micro won't be able to handle the memory-intensive analyses of microarrays or whole genome mapping, or be able to handle multiple users very well. The r3 instances are optimized for RAM use and are actually recommended for genomic applications. They are not free, but they are very affordable for course costs, especially when compared to wet-lab biology materials!
 
 Before the class meets for lab, from the Actions pull down menu of your instance:
 
@@ -138,7 +142,7 @@ Students can input their current password and change to one of their liking. Tel
 
 ## Optional: Create permanent URL and domain name
 
-Normally if you stop and restart your instance, you are assigned a new IP address. You can simply write the name of the new IP on the whiteboard or post it on-line whenever it changes. However, Amazon has an elastic IP that you can use. It's free as long as an instance is running. Since we can always run our free t2.micro instance, an elastic IP is essentially free. 
+Normally if you stop and restart your instance, you are assigned a new IP address. You can simply write the name of the new IP on the whiteboard or post it on-line whenever it changes. However, Amazon has an elastic IP that you can use. An elastic IP will act a permanent IP, which will be assigned to your instance while it is running. It's free as long as an instance is running, and is $0.005 / hour when the instance is not running. Since we can always run our free t2.micro instance, an elastic IP is essentially free. 
 
 Find Elastic IPs in the side menu of the EC2 Console. 
 
