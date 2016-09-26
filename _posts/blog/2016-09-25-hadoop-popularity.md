@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Hadoop Popularity"
+modified:
 excerpt: "Pigs & Hives have nothing on Spark"
 categories: blog
-author: "Keith Hultman"
+image:
+	feature: 
 date: 2016-09-25
 tags: [BigData]
 ---
