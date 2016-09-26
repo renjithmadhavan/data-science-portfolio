@@ -1,11 +1,14 @@
 ---
 layout: post
 title: "Hadoop Popularity"
+author: keith_hultman
+modified:
 categories: blog
-author: "Keith Hultman"
-date: 2016-09-25
+excerpt: "Hive and Pig are no match for Spark"
 tags: [BigData]
-output: html_document
+image:
+  feature: feature-image-data-blue.jpg
+date: 2016-09-25
 ---
 
 
@@ -21,7 +24,6 @@ I first found the most popular tag for the associated technologies at [Stackover
 
 
 {% highlight r %}
-setwd("/Volumes/Half_Dome/OneDrive\ -\ Elmhurst\ College/Elmhurst\ Data\ Science/Programming\ Languages/Hadoop\ tech\ popularity/")
 pig <- read.csv("pig.csv", header = TRUE)
 hive <- read.csv("hive.csv", header = TRUE)
 pighive <- rbind(pig, hive) #combine the data to one dataframe
@@ -44,7 +46,7 @@ How do the other Hadoop-related technologies compare?
 
 
 {% highlight r %}
-setwd("/Volumes/Half_Dome/OneDrive\ -\ Elmhurst\ College/Elmhurst\ Data\ Science/Programming\ Languages/Hadoop\ tech\ popularity/")
+Hadoop\ tech\ popularity/")
 hadoop <- read.csv("hadoop.csv", header = TRUE)
 hbase <- read.csv("hbase.csv", header = TRUE)
 spark <- read.csv("spark.csv", header = TRUE)
