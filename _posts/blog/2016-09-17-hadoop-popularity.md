@@ -46,7 +46,6 @@ How do the other Hadoop-related technologies compare?
 
 
 {% highlight r %}
-Hadoop\ tech\ popularity/")
 hadoop <- read.csv("hadoop.csv", header = TRUE)
 hbase <- read.csv("hbase.csv", header = TRUE)
 spark <- read.csv("spark.csv", header = TRUE)
