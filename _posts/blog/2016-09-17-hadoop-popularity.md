@@ -34,7 +34,7 @@ ggplot(pighive, aes(mo, Total.Votes)) +
   xlab("Time")
 {% endhighlight %}
 
-![plot of chunk Pig vs Hive](//Users/keithhultman/github/data-science-portfolio/figures/Pig vs Hive-1.svg)
+![plot of chunk Pig vs Hive]({{site.url}}/figures/Pig vs Hive-1.svg)
 
 The number of posts with apache-pig as the tag has plataeued and slightly droped from its peak in 2014. Hive has gained in popularity and has more than 3x the number of posts. Seems like a clear winner for Hive here.  
 
@@ -61,7 +61,7 @@ ggplot(hadoop_all, aes(mo, Total.Votes)) +
   xlab("Time")
 {% endhighlight %}
 
-![plot of chunk All](//Users/keithhultman/github/data-science-portfolio/figures/All-1.svg)
+![plot of chunk All]({{site.url}}/figures/All-1.svg)
 
 Hive's rise is completely dwarfed by the acceleration over the past year and half of Spark. Spark is tagged in twice the number of posts as the general Hadoop tag, a technology it was built upon. This has convinced me to put full effort into learning Spark going forward. 
 
