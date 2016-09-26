@@ -2,17 +2,13 @@
 layout: post
 title: "Hadoop Popularity"
 modified:
-excerpt: "Pigs & Hives have nothing on Spark"
 categories: blog
-image:
-	feature: 
-date: 2016-09-25
+excerpt: "Pigs & Hives have nothing on Spark"
 tags: [BigData]
+image:
+	feature: feature-image-data-blue.jpg
+date: 2016-09-25
 ---
-
-
-
-
 
 ## Exploring the popularity of Pig and Hive
 
