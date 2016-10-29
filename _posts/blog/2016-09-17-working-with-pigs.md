@@ -6,7 +6,7 @@ categories: blog
 excerpt: "Grunt"
 tags: [BigData]
 image:
-  feature:
+  feature: feature-image-data-blue.jpg
 date: 2016-09-17
 ---
 
