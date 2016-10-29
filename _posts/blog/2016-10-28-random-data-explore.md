@@ -25,7 +25,7 @@ randcorr <- cor(randata)
 corrplot(randcorr, method = "circle")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-1](//Users/keithhultman/github/data-science-portfolio/figures/unnamed-chunk-1-1.svg)
+![plot of chunk unnamed-chunk-1]({{site.url}}/figures/unnamed-chunk-1-1.svg)
 
 With 20 features and 1000 observations for each feature we don't see many features that have a high correlation. The highest correlation value, in either positive or negative direction is:
 
@@ -110,7 +110,7 @@ trandata_high <- cor(trandata[,highlyCorrelated])
 corrplot(trandata_high, method = "circle")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-4](//Users/keithhultman/github/data-science-portfolio/figures/unnamed-chunk-4-1.svg)
+![plot of chunk unnamed-chunk-4]({{site.url}}/figures/unnamed-chunk-4-1.svg)
 
 ### And knowing is half the battle!
 Here we can see several strong correlations between these columns. Strong positive correlations are dark blue and strong negative correlations are dark red. This Monte Carlo simulation shows how easy it is to find very strong correlations in a wide and shallow data set even from completely random numbers. 
