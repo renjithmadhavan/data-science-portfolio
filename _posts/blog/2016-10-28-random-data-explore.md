@@ -2,7 +2,7 @@
 layout: post
 title: "Monte Carlo of Random Correlations"
 categories: blog
-author: "Keith Hultman"
+author: "keith_hultman"
 date: 2016-10-28
 tags: [BigData, correlation]
 image:

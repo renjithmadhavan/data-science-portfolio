@@ -10,7 +10,7 @@ image:
 ---
 
 <figure>
-	<img src="{{ site.url }}/images/bio-photo-about.jpg" alt="Keith">
+	<img src="{{ site.url }}/images/profile-2016.jpg" alt="Keith">
 </figure>
 
 Keith is currently a Visiting Assistant Professor of Biology at Elmhurst College near Chicago IL. 
