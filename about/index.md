@@ -13,13 +13,15 @@ image:
 	<img src="{{ site.url }}/images/profile-2016.jpg" alt="Keith">
 </figure>
 
-Keith is currently a Visiting Assistant Professor of Biology at Elmhurst College near Chicago IL. 
+A data scientist with expertise in biomedical research and bioinformatics. Keith is currently a Visiting Assistant Professor of Biology at Elmhurst College near Chicago IL. 
 
 ## Highlights of Keith's qualifications
 * Ph.D. in Molecular Genetics and Genomics from Washington University
 * Masters in Data Science (expected July 2017) from Elmhurst College
 * Ordained minister of Universal Life Church (administered marriage ceremony of his best friends)
 * Father of twin girls Maren and Eden
+
+Contact: [Email](mailto:keithh@gmail.com)
 
 <a markdown="0" href="{{ site.url }}/documents/hultman-resume.pdf" class="btn">Resume (pdf)</a>
 
