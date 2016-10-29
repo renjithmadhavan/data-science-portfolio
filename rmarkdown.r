@@ -1,6 +1,6 @@
 #' This R script will process all R mardown files (those with in_ext file extention,
-#' .rmd by default) in the current working directory. Files with a status of
-#' 'processed' will be converted to markdown (with out_ext file extention, '.markdown'
+#' .Rmd by default) in the current working directory. Files with a status of
+#' 'processed' will be converted to markdown (with out_ext file extention, '.md'
 #' by default). It will change the published parameter to 'true' and change the
 #' status parameter to 'publish'.
 #' 
@@ -13,7 +13,7 @@
 #' @return nothing.
 #' @author Jason Bryer <jason@bryer.org>
 convertRMarkdown <- function(dir=getwd(), images.dir=dir, images.url='/images/',
-							 out_ext='.markdown', in_ext='.Rmd', recursive=FALSE) {
+							 out_ext='.md', in_ext='.Rmd', recursive=FALSE) {
 	require(knitr, quietly=TRUE, warn.conflicts=FALSE)
 	files <- list.files(path=dir, pattern=in_ext, ignore.case=TRUE, recursive=recursive)
 	for(f in files) {

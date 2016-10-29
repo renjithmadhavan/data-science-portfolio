@@ -1,0 +1,19 @@
+Converting R markdown to jekyll markdown
+
+one method is from http://brooksandrew.github.io/simpleblog/articles/blogging-with-r-markdown-and-jekyll-using-knitr/
+
+Another method is method #2 from
+http://jason.bryer.org/posts/2012-12-10/Markdown_Jekyll_R_for_Blogging.html
+
+I'm using this method (I think, I don't remember I installed it a few weeks ago):
+https://www.r-bloggers.com/blogging-with-rmarkdown-knitr-and-jekyll/
+
+
+To convert rmarkdown to markdown, place rmarkdown (.Rmd file) in _knitr folder. Then in terminal, go to _knitr folder and run 
+
+$./buildsite.sh -c 
+
+to see other options just run
+
+$./buildsite.sh
+
