@@ -33,15 +33,16 @@ mathjax: true
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", ".less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
 
+comments: true
 
 # Site owner
 owner:
   name: Keith Hultman
   avatar: bio-photo.jpg
   email: keithh@gmail.com
-  disqus-shortname:
+  disqus-shortname: keithhultman
   twitter: keithhultman
-  facebook: keithh@gmail.com
+  facebook:
   github: kahultman
   stackexchange: #http://stackoverflow.com/users/123456/username
   linkedin: keithhultman
