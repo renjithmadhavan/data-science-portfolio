@@ -2,7 +2,7 @@
 
 title: Keith Hultman | Data Scientist
 locale: Chicago, IL
-description: Data science portfolio of some projects I've been working on.
+description: A portfolio of data science projects
 logo: site-logo.png
 search: true
 url: https://kahultman.github.io/data-science-portfolio
@@ -42,9 +42,9 @@ owner:
   email: keithh@gmail.com
   disqus-shortname: keithhultman
   twitter: keithhultman
-  facebook:
+  facebook: #username
   github: kahultman
-  stackexchange: #http://stackoverflow.com/users/123456/username
+  stackexchange: #http://stackoverflow.com/users/123456/keith-hultman
   linkedin: keithhultman
   instagram: #username
   flickr: #username
