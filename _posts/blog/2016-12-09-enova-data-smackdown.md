@@ -1,17 +1,15 @@
 ---
 layout: post
 title: "Enova Data Smackdown Competition"
-modified:
+author: "Keith Hultman"
 categories: blog
 excerpt: "Small linear regression model wins big"
 tags: [data, competition, meetup]
 image:
-  feature: feature-image-podcast.jpg
-  credit: Patrick Breitenbach
+  feature: feature-image-dna1.jpg
+  credit: Adobe
   creditlink: 
 date: 2016-12-09
-comments: true
-share: true
 ---
 
 Last night I attended a great data science meetup hosted by [Enova Decisions](https://www.enovadecisions.com/) in downtown Chicago. I've been to a few other data related meetups that mostly focused on talks or networking, but this one was all based around a challenging data set for participants to delve into. 
