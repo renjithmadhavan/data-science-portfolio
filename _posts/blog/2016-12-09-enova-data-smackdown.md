@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Enova Data Smackdown Competition"
-author: "Keith Hultman"
+author: "keith_hultman"
 categories: blog
 excerpt: "Small linear regression model wins big"
 tags: [data, competition, meetup]
+share: true
 image:
   feature: feature-image-dna1.jpg
   credit: Adobe
