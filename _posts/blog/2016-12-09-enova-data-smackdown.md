@@ -25,7 +25,7 @@ Our group worked pretty well together coming up with particular components of th
 
 Our final model was 
 
-profit ~ advance_amount + major_category + in_house_review + weeks_spent_writing
+	profit ~ advance_amount + major_category + in_house_review + weeks_spent_writing
 
 ## Not every problem in data science is Prediction
 
