@@ -2,6 +2,7 @@
 layout: post
 title: "West Nile Virus Project"
 excerpt: "Predicting spread of West Nile Virus in Chicago"
+author: keith_hultman
 modified: 2016-12-17
 categories: articles
 tags: [R, Project, Prediction, Data Exploration]
