@@ -57,7 +57,7 @@ ggplot(train, aes(x=Tavg, y=Mosq_count)) +
   xlab("Average daily temperature, degree F") + ylab("Number of mosquitoes per trap")
 {% endhighlight %}
 
-![plot temp vs num]({{site.url}}/figures/WNV-load plot wnv present-1.png)
+![plot temp vs num]({{site.url}}/figures/WNV-plot temp vs num-1)
 
 
 ## Tidying and transforming data 
