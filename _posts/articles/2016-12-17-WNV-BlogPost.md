@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "West Nile Virus Project"
+title: "West Nile Virus in Chicago, Part 1"
 excerpt: "Predicting spread of West Nile Virus in Chicago"
 author: keith_hultman
 modified: 2016-12-17
@@ -18,17 +18,17 @@ This project will explore and analyze a dataset for West Nile Virus (WNV) detect
 2. There is a very specific question or problem to solve. I think this is a major reason to select data sets from Kaggle and other competition sites, even if you don't like the competition aspect. It's fun to grab a data set from the web and look at it, but I have a hard time focusing on one problem unless there is a directive. In this way Kaggle is acting like a very good client and providing me not only with data but also a specific question. Less time wasted on figuring out the question means more time to develop models and visualizations!
 3. There is an evaluation method on a test set that you can use to gauge yourself against. Even after the comp is over, you can submit a file for evaluation and see where you would have ranked. 
 
-The analysis will follow an iterative approach to finding a production model for West Nile forecasting. There are several data science iterative methods, such as [CRISP](./images/CRISP.png), but my favorite visual for an iterative approach is from Hadley Wickham's R for Data Science[^1]. Additionally, this analysis conforms to reproducible research standards and can be reconstructed from source files available at my [GitHub](https://github.com/kahultman/west-nile-virus) repository.
+The analysis will follow an iterative approach to finding a production model for West Nile forecasting. There are several data science iterative methods, such as [CRISP](./images/CRISP.png), but my favorite visual for an iterative approach is from Hadley Wickham's R for Data Science[^1]. Additionally, this entire analysis conforms to reproducible research standards and can be reconstructed from source files available at my [GitHub](https://github.com/kahultman/west-nile-virus) repository. 
 
 ![Wickham's iterative approach to data science]({{site.url}}/figures/WNV-data-science-explore.png)
 
-The goal for this project is to develop a predictive model that will forecast the probability of WNV presence in 138 mosquito traps around Chicago over the course of a season. WNV is a communicable disease that is spread through its most common vector, mosquitoes. Most people infected with WNV develop no symtoms, but 1% will develop neurological symptoms including headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis[^2]. There are no medical treatments or cures for WNV, so preventative measures are required to reduce infection to the human population. Local community methods of mosquito control include reduction of larval habitats and applying insecticides targetting larvae or adult mosquitoes.  
+The goal for this project is to develop a predictive model that will forecast the probability of WNV presence in 138 mosquito traps around Chicago over the course of a season. WNV is a communicable disease that is spread through its most common vector, mosquitoes. Most people infected with WNV develop no symptoms, but 1% will develop neurological symptoms including headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis[^2]. There are no medical treatments or cures for WNV, so preventative measures are required to reduce infection to the human population. Local community methods of mosquito control include reduction of larval habitats and applying insecticides targeting larvae or adult mosquitoes.  
 
-Being able to predict the most likely sites of WNV outbreak is highly valuable to reduce the financial and human cost of over-application of insecticides. This project will focus on developing a deeper understanding of the problem using visuals and then develop a few relatively simple predictive models based on geographic information, weather conditions, presence of mosquito species, and historical trends of mosquito populations in order to predict the presence of WNV in the Chicago area.   
+Being able to predict the most likely sites of WNV outbreak is highly valuable to reduce the financial and human cost of over-application of insecticides. This project will focus on developing a deeper understanding of the problem using visuals and then develop a few relatively simple predictive models based on geographic information, weather conditions, presence of mosquito species, and historical trends of mosquito populations to predict the presence of WNV in the Chicago area.   
 
 ## Data briefing
 
-Kaggle supplies five data sets for the competition, three of which can be used in model training. The train.csv file includes several variables associated with each West Nile Virus test including the trap id, geo-coordinates, date, species of mosquito present, number of mosquitoes present, and a binary variable indicating the presence or absence of West Nile Virus (WnvPresent), our target variable. The test.csv contains all of the same features as the train.csv file except the number of mosquitoes present and the target WnvPresent variable. These data sets were obtained from West Nile Virus testing period between 2007 and 2014 with the training set containing the odd years and the test set containing the even years. The weather.csv file contains historic weather data collected at the O'Hare and Midway airports concurrent with the mosquito testing time period. The spray.csv file includes the date and location of chemical spraying conducted by the city during 2011 and 2013. Since this spray data set would only have a large impact during one of the training years, I did not include the spray data in any of my models. For the weather data, since the differences in variables between O'Hare and Midway were generally small, I chose to use only the O'Hare data for all traps, rather than compute the closest station for each trap. 
+Kaggle supplies five data sets for the competition, three of which can be used in model training. The train.csv file includes several variables associated with each West Nile Virus test including the trap id, geo-coordinates, date, species of mosquito present, number of mosquitoes present, and a binary variable indicating the presence or absence of West Nile Virus (WnvPresent), our target variable. The test.csv contains all the same features as the train.csv file except the number of mosquitoes present and the target WnvPresent variable. These data sets were obtained from West Nile Virus testing period between 2007 and 2014 with the training set containing the odd years and the test set containing the even years. The weather.csv file contains historic weather data collected at the O'Hare and Midway airports concurrent with the mosquito testing period. The spray.csv file includes the date and location of chemical spraying conducted by the city during 2011 and 2013. Since this spray data set would only have a large impact during one of the training years, I did not include the spray data in any of my models. For the weather data, since the differences in variables between O'Hare and Midway were generally small, I chose to use only the O'Hare data for all traps, rather than compute the closest station for each trap. 
 
 A large hypothetical variable influencing viral infection is population size. A larger population means there are more mosquitoes who can become infected, but it also increases the number of interactions between hosts, allowing faster spread of virus from individual to individual. The size of the population can be estimated from the number of mosquitoes found in each trap. However, *this variable is not present in the test set*, and will need to be imputed from other variables before a final model can be fit to the presence of West Nile using population as an input. 
 
@@ -149,7 +149,7 @@ summary(lm1)
 
 ## Evaluate linear model for predicting mosquito number
 
-The R^2 of the first model is 0.11, meaning that only 11% of observed mosquito population variation is explained by our weather model.To further evaluate the linear regression model, we can examine the residual errors against predicted numbers in the training data. 
+The R^2 of the first model is 0.11, meaning that only 11% of observed mosquito population variation is explained by our weather model. To further evaluate the linear regression model, we can examine the residual errors against predicted numbers in the training data. 
 
 
 {% highlight r %}
@@ -267,7 +267,7 @@ This results in an even lower R^2 value of 0.06 and a higher RMSE error score. S
 
 ## A further look at mosquito number distribution
 
-In order to get a better estimate of mosquito counts, I next wanted to go back and examine the distribution of the Mosquito counts a bit further. The total number with each observation is capped between 1 and 50 mosquitoes. Since there are several rows of data for each trap/date combination when one trap has the full 50 mosquitos, this is likely how the mosquitos are split up for testing. Mosquitoes are collected in the traps and split up into groups with no more than 50 mosquitos, recorded for Species and then tested for WNV. To help correct for this, I added up all of the multiple observations per trap to This distribution is not at all near normal or gaussian, as you can see by the histograms below, and instead resembles a Poisson distribution with no zeros and a cap at 50. Compare the QQplots of Normal and Poisson ($\lambda = 12.8$) distributions against log2 transformed number of mosquitos.
+To get a better estimate of mosquito counts, I next wanted to go back and examine the distribution of the Mosquito counts a bit further. The total number with each observation is capped between 1 and 50 mosquitoes. Since there are several rows of data for each trap/date combination when one trap has the full 50 mosquitos, this is likely how the mosquitos are split up for testing. Mosquitoes are collected in the traps and split up into groups with no more than 50 mosquitos, recorded for Species and then tested for WNV. To help correct for this, I added up all of the multiple observations per trap to This distribution is not at all near normal or gaussian, as you can see by the histograms below, and instead resembles a Poisson distribution with no zeros and a cap at 50. Compare the QQplots of Normal and Poisson ($\lambda = 12.8$) distributions against log2 transformed number of mosquitos.
 
 
 {% highlight r %}
@@ -362,7 +362,7 @@ This is slightly better than standard linear regression, with an RMSE of 778.5. 
 
 ## Examining the effect of geography and location
 
-In addition to mosquito population size and weather variables, there is likely to be an effect based on a trap's geographic location. Next, I wanted to visually examine the relationship between geography and West Nile presence. In other words, I wanted to make some cool maps! First I created a map of Wnv incidents as a density plot. Here, the density is based off of the overall positive count for each trap. 
+In addition to mosquito population size and weather variables, there is likely to be an effect based on a trap's geographic location. Next, I wanted to visually examine the relationship between geography and West Nile presence. In other words, I wanted to make some cool maps! First I created a map of Wnv incidents as a density plot. Here, the density is derived from the overall positive count for each trap. 
 
 
 {% highlight r %}
@@ -385,7 +385,7 @@ ggmap(chicago) + geom_density2d(data = wnpositive, aes(x = Longitude, y = Latitu
 
 It's clear from the density map that there are hotspot traps where West Nile is more common than others, and this appears to influence nearby traps.  
 
-Now that we have a good 2-dimensional view of the occurance of WNV, I next wanted to get a sense of how this pattern of West Nile Virus changed over time in relation to the geography. I did this by creating an animated version of this map using a new R package called gganimate. I chose to remove the background map of chicago to get a clearer visual of positive vs negative cases. This animation uses the new gganimate package. 
+Now that we have a good 2-dimensional view of the occurence of WNV, I next wanted to get a sense of how this pattern of West Nile Virus changed over time in relation to the geography. I did this by creating an animated version of this map using a new R package called gganimate. I chose to remove the background map of Chicago to get a clearer visual of positive vs negative cases. This animation uses the new gganimate package. 
 
 
 {% highlight r %}
@@ -443,52 +443,10 @@ ggmap(chicago) + geom_density2d(data = wnpositive, aes(x = Longitude, y = Latitu
 Now that I have some geographical clusters for each trap and a good handle on predicting mosquito number, I can use those as input variables for the ultimate target, WNV probability. I will be comparing several different models for my next post. 
 
 
-# Bibliography and Session Info
+# Bibliography
 
-[^1]: Wickham, H., R for Data Science. http://r4ds.had.co.nz/
+[^1]: Wickham, H., [R for Data Science.](http://r4ds.had.co.nz/)
 
-[^2]: CDC https://www.cdc.gov/westnile/index.html
+[^2]: [CDC West Nile page](https://www.cdc.gov/westnile/index.html)
 
-
-{% highlight r %}
-sessionInfo()
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## R version 3.3.1 (2016-06-21)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
-## Running under: OS X 10.11.6 (El Capitan)
-## 
-## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  base     
-## 
-## other attached packages:
-##  [1] animation_2.4   gganimate_0.1   ggmap_2.6.1     caret_6.0-73   
-##  [5] lattice_0.20-34 dplyr_0.5.0     purrr_0.2.2     readr_1.0.0    
-##  [9] tidyr_0.6.0     tibble_1.2      ggplot2_2.2.0   tidyverse_1.0.0
-## [13] plyr_1.8.4      knitr_1.15.1   
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.8        nloptr_1.0.4       methods_3.3.1     
-##  [4] iterators_1.0.8    tools_3.3.1        digest_0.6.10     
-##  [7] lme4_1.1-12        evaluate_0.10      gtable_0.2.0      
-## [10] nlme_3.1-128       mgcv_1.8-16        png_0.1-7         
-## [13] Matrix_1.2-7.1     foreach_1.4.3      DBI_0.5-1         
-## [16] mapproj_1.2-4      parallel_3.3.1     SparseM_1.74      
-## [19] proto_1.0.0        stringr_1.1.0      maps_3.1.1        
-## [22] RgoogleMaps_1.4.1  MatrixModels_0.4-1 stats4_3.3.1      
-## [25] grid_3.3.1         nnet_7.3-12        R6_2.2.0          
-## [28] jpeg_0.1-8         sp_1.2-3           minqa_1.2.4       
-## [31] reshape2_1.4.2     car_2.1-3          magrittr_1.5      
-## [34] scales_0.4.1       codetools_0.2-15   ModelMetrics_1.1.0
-## [37] MASS_7.3-45        splines_3.3.1      assertthat_0.1    
-## [40] pbkrtest_0.4-6     geosphere_1.5-5    colorspace_1.3-1  
-## [43] quantreg_5.29      stringi_1.1.2      lazyeval_0.2.0    
-## [46] munsell_0.4.3      rjson_0.2.15
-{% endhighlight %}
 
