@@ -44,8 +44,7 @@ ggplot(train, aes(x=WnvPresent, y=NumMosquitos)) +
   xlab("West Nile Virus present in trap") + ylab("Number of mosquitoes in trap")
 {% endhighlight %}
 
-![wnv numbers]({{site.url}}/WNV-load plot wnv present-1.png)
-
+![wnv numbers]({{site.url}}/figures/WNV-load plot wnv present-1.png)
 
 Based on this initial data exploration, I will first try and develop a model that predicts the number of mosquitoes in each trap and then use that predicted value as a variable in a model for WNV presence. For predicting the number of mosquitoes, I will first attempt using weather variables and weekly historic averages. Before modeling, I examined scatterplots of various input variables against mosquito counts, like the graph below comparing temperature to mosquito counts. 
 
@@ -58,7 +57,8 @@ ggplot(train, aes(x=Tavg, y=Mosq_count)) +
   xlab("Average daily temperature, degree F") + ylab("Number of mosquitoes per trap")
 {% endhighlight %}
 
-![plot temp vs num]({{site.url}}/figures/WNV-load plot wnv present-1)
+![plot temp vs num]({{site.url}}/figures/WNV-load plot wnv present-1.png)
+
 
 ## Tidying and transforming data 
 
